@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en" class="antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>LeadSpark Ultra — Premium LeadGen Landing</title>
+    <meta
+      name="description"
+      content="LeadSpark Ultra — premium lead generation landing with node admin, mockups and demo content."
+    />
+    <link rel="icon" href="/assets/favicon.svg" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /*
+        Theme Name: LeadSpark Ultra
+        Description: Premium lead generation landing page theme with Stripe integration, dark mode, and responsive design.
+        Version: 1.0
+        Author: Sayyodbek Rakhmonov
+        License: GPL v2 or later
+        License URI: https://www.gnu.org/licenses/gpl-2.0.html
+        Text Domain: leadspark-ultra
+      */
+
+      :root {
+        --bg-color: #ffffff;
+        --text-color: #0f172a;
+        --text-secondary: #475569;
+        --border-color: #e2e8f0;
+        --card-bg: #ffffff;
+        --input-bg: #ffffff;
+        --input-border: #cbd5e1;
+        --hover-bg: #f8fafc;
+        --btn-bg: #2563eb;
+        --btn-hover: #1d4ed8;
+        --btn-outline-border: #cbd5e1;
+        --btn-outline-text: #0f172a;
+        --btn-outline-hover: #f8fafc;
+      }
+      .dark-theme {
+        --bg-color: #0f172a;
+        --text-color: #ffffff;
+        --text-secondary: #cbd5e1;
+        --border-color: #334155;
+        --card-bg: #1e293b;
+        --input-bg: #334155;
+        --input-border: #475569;
+        --hover-bg: #334155;
+        --btn-bg: #3b82f6;
+        --btn-hover: #2563eb;
+        --btn-outline-border: #475569;
+        --btn-outline-text: #ffffff;
+        --btn-outline-hover: #334155;
+      }
+      body {
+        background: var(--bg-color);
+        color: var(--text-color);
+        transition: 0.3s, color 0.3s ease;
+        overflow-x: hidden;
+      }
+
+      * {
+        scroll-behavior: smooth;
+      }
+
+      .mobile-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        z-index: 10;
+      }
+      .mobile-menu.show {
+        display: block;
+      }
+      .mobile-menu a {
+        color: var(--text-color);
+      }
+      .mobile-menu a:hover {
+        background: var(--hover-bg);
+      }
+      header {
+        background: var(--card-bg);
+        border-bottom: 1px solid var(--border-color);
+      }
+      .input {
+        background: var(--input-bg);
+        border: 1px solid var(--input-border);
+        color: var(--text-color);
+        padding: 0.5rem;
+        border-radius: 0.375rem;
+      }
+      .btn {
+        background: var(--btn-bg);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        transition: 0.3s ease;
+      }
+      .btn:hover {
+        background: var(--btn-hover);
+      }
+      .btn-outline {
+        background: transparent;
+        border: 1px solid var(--btn-outline-border);
+        color: var(--btn-outline-text);
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        transition: 0.3s, color 0.3s ease;
+      }
+      .btn-outline:hover {
+        background: var(--btn-outline-hover);
+      }
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border-color);
+        color: var(--text-color);
+      }
+      .text-secondary {
+        color: var(--text-secondary);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="shadow-sm relative">
+      <div class="max-w-6xl mx-auto p-4 flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <img
+            src="/assets/logo.svg"
+            alt="LeadSpark Ultra"
+            style="height: 40px"
+            class="sm:h-12"
+          />
+          <!-- Mobile Button Menu -->
+          <button
+            id="mobileMenuBtn"
+            class="md:hidden p-1"
+            aria-label="Toggle menu"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+          <!-- Desktop Navigation -->
+          <nav class="hidden md:flex gap-6 text-sm">
+            <a href="#home" class="hover:underline">Home</a>
+            <a href="#features" class="hover:underline">Features</a>
+            <a href="#pricing" class="hover:underline">Pricing</a>
+            <a href="#screens" class="hover:underline">Screenshots</a>
+          </nav>
+          <!-- Mobile menu -->
+          <nav id="mobileMenu" class="mobile-menu md:hidden">
+            <a href="#home" class="block px-4 py-2 hover:bg-slate-100">Home</a>
+            <a href="#features" class="block px-4 py-2 hover:bg-slate-100"
+              >Features</a
+            >
+            <a href="#pricing" class="block px-4 py-2 hover:bg-slate-100"
+              >Pricing</a
+            >
+            <a href="#screens" class="block px-4 py-2 hover:bg-slate-100"
+              >Screenshots</a
+            >
+          </nav>
+        </div>
+        <div class="flex items-center gap-3">
+          <button
+            id="themeToggle"
+            class="btn-outline px-3 py-1 rounded text-sm"
+          >
+            Dark
+          </button>
+          <a href="/admin" class="px-3 py-1 text-sm underline">Admin</a>
+        </div>
+      </div>
+    </header>
+
+    <main
+      id="home"
+      class="max-w-7xl mx-auto p-4 sm:p-6 space-y-8 sm:space-y-12"
+    >
+      <section class="grid sm:grid-cols-2 gap-6 sm:gap-8 items-center">
+        <div>
+          <h1
+            class="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight"
+          >
+            LeadSpark Ultra — Turn traffic into paying customers
+          </h1>
+          <p class="mt-4 text-base sm:text-lg text-secondary">
+            A premium lead-gen landing with backend admin, Stripe demo, polished
+            UI, mockups and marketing-ready assets.
+          </p>
+          <ul class="mt-6 space-y-2 text-secondary text-sm sm:text-base">
+            <li>• Full-stack Node.js + Express</li>
+            <li>• Demo Stripe Checkout & SMTP</li>
+            <li>• Admin panel with search, date filter and CSV export</li>
+          </ul>
+          <div class="mt-6 flex flex-col sm:flex-row gap-3">
+            <a href="#leadForm" class="btn">Request demo</a>
+            <a href="#pricing" class="btn-outline">Pricing</a>
+          </div>
+        </div>
+        <div class="rounded-xl p-4 sm:p-6 shadow-xl card">
+          <img
+            src="/mockups/laptop.svg"
+            alt="mockup"
+            class="w-full h-auto rounded-md object-cover max-w-full"
+          />
+        </div>
+      </section>
+
+      <section id="leadForm" class="form-section card p-4 sm:p-6 rounded-xl">
+        <h2 class="text-xl sm:text-2xl font-semibold mb-4">Book a demo</h2>
+        <form id="leadForm" class="grid gap-4" autocomplete="off" novalidate>
+          <input
+            name="name"
+            id="name"
+            type="text"
+            placeholder="Full name"
+            class="input"
+            required
+          />
+          <input
+            name="email"
+            id="email"
+            type="email"
+            placeholder="Email address"
+            class="input"
+            required
+          />
+          <input
+            name="company"
+            id="company"
+            type="text"
+            placeholder="Company (optional)"
+            class="input"
+          />
+          <input
+            name="phone"
+            id="phone"
+            type="tel"
+            placeholder="Phone (optional)"
+            class="input"
+          />
+          <textarea
+            name="message"
+            id="message"
+            rows="4"
+            placeholder="Tell us about your needs..."
+            class="input"
+          ></textarea>
+          <label class="flex items-center gap-2"
+            ><input type="checkbox" id="agree" required /> I agree to be
+            contacted</label
+          >
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center gap-3"
+          >
+            <button id="submitBtn" class="btn" type="submit">
+              Send request
+            </button>
+            <button id="stripeBtn" type="button" class="btn-outline">
+              Pay / Checkout
+            </button>
+            <span id="formMsg" class="text-sm text-secondary"></span>
+          </div>
+        </form>
+      </section>
+
+      <section
+        id="features"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6"
+      >
+        <div class="p-4 sm:p-6 card rounded-lg">
+          <h3 class="font-semibold text-base sm:text-lg">Design Ready</h3>
+          <p class="mt-2 text-sm text-secondary">
+            High-quality hero, mockups and screenshots included.
+          </p>
+        </div>
+        <div class="p-4 sm:p-6 card rounded-lg">
+          <h3 class="font-semibold text-base sm:text-lg">Admin Panel</h3>
+          <p class="mt-2 text-sm text-secondary">
+            Search, filter and download leads.
+          </p>
+        </div>
+        <div class="p-4 sm:p-6 card rounded-lg">
+          <h3 class="font-semibold text-base sm:text-lg">Easy Monetize</h3>
+          <p class="mt-2 text-sm text-secondary">
+            Stripe demo for quick checkout testing.
+          </p>
+        </div>
+      </section>
+
+      <section id="screens" class="p-4 sm:p-6 rounded-xl card">
+        <h3 class="text-xl sm:text-2xl font-semibold mb-4">
+          Screenshots & mockups
+        </h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <img
+            src="/screens/screen1.svg"
+            alt="s1"
+            class="w-full h-auto rounded shadow max-w-full"
+          />
+          <img
+            src="/screens/screen2.svg"
+            alt="s2"
+            class="w-full h-auto rounded shadow max-w-full"
+          />
+          <img
+            src="/screens/screen3.svg"
+            alt="s3"
+            class="w-full h-auto rounded shadow max-w-full"
+          />
+        </div>
+      </section>
+
+      <section id="pricing" class="p-4 sm:p-6 rounded-xl card">
+        <h3 class="text-xl sm:text-2xl font-semibold mb-4">Pricing examples</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="p-4 rounded-lg shadow-sm card">
+            <h4 class="font-bold text-base sm:text-lg">Starter</h4>
+            <p class="text-lg sm:text-xl mt-2">$79</p>
+            <ul class="mt-3 text-sm space-y-1 text-secondary">
+              <li>1 landing</li>
+              <li>Email notifications</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-lg shadow-sm card">
+            <h4 class="font-bold text-base sm:text-lg">Pro</h4>
+            <p class="text-lg sm:text-xl mt-2">$249</p>
+            <ul class="mt-3 text-sm space-y-1 text-secondary">
+              <li>Custom branding</li>
+              <li>Stripe integration</li>
+            </ul>
+          </div>
+          <div class="p-4 rounded-lg shadow-sm card">
+            <h4 class="font-bold text-base sm:text-lg">Agency</h4>
+            <p class="text-lg sm:text-xl mt-2">$799</p>
+            <ul class="mt-3 text-sm space-y-1 text-secondary">
+              <li>Multi-landing</li>
+              <li>Priority support</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer
+      class="max-w-7xl mx-auto p-4 sm:p-6 text-center text-sm text-secondary"
+    >
+      © <span id="year"></span> LeadSpark Ultra
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      // Mobile menu
+      const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+      const mobileMenu = document.getElementById("mobileMenu");
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("show");
+      });
+      document.addEventListener("click", (e) => {
+        if (
+          !mobileMenuBtn.contains(e.target) &&
+          !mobileMenu.contains(e.target)
+        ) {
+          mobileMenu.classList.remove("show");
+        }
+      });
+
+      // Dark/Light Mode
+
+      const themeToggle = document.getElementById("themeToggle");
+      const body = document.body;
+
+      function applyTheme(isDark) {
+        if (isDark) {
+          body.classList.add("dark-theme");
+          themeToggle.textContent = "Light";
+          localStorage.setItem("theme", "dark");
+        } else {
+          body.classList.remove("dark-theme");
+          themeToggle.textContent = "Dark";
+          localStorage.setItem("theme", "light");
+        }
+      }
+
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "dark") {
+        applyTheme(true);
+      } else {
+        applyTheme(false);
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const isDark = body.classList.contains("dark-theme");
+        applyTheme(!isDark);
+      });
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
